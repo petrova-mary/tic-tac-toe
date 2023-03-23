@@ -31,3 +31,30 @@ const winningConditions = [
     [0, 4, 8],
     [2, 4, 6]
 ];
+
+//The result evaluation
+function handleResultValidation() {
+    let roundWon = false;
+    for (let i = 0; i <= 7; i++) {
+        const winCondition = winningConditions[i];
+        const a = board[winCondition[0]]; //creates an index within the board
+        const b = board[winCondition[1]];
+        const c = board[winCondition[2]];
+        if (a === '' || b === '' || c === '') { //empty
+            continue; 
+        }
+
+        if (a === b && b === c) { //equal
+            roundWon = true;
+            break;
+        }
+    }
+
+    if (roundWon) {
+        announce(currentPlayer === 'X' ? PLAYERX_WON : PLAYERO_WON); //ternary expression
+        isGameActive = false;
+        return;
+    }
+
+    if (!board.includes('')) announce(TIE);
+}
