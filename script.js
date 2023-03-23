@@ -103,4 +103,26 @@ const userAction = (tile, index) => {
             handleResultValidation();
             changePlayer(); 
         }
+}
+
+//Resetting the game
+const resetBoard = () => {
+    board = ['', '', '', '', '', '', '', '', ''];
+    isGameActive = true; //set the game to active
+    announcer.classList.add('hide'); //remove the announcer
+
+    if (currentPlayer === 'O') { //change the player back to X  
+        changePlayer();
     }
+
+    tiles.forEach(tile => { 
+        tile.innerText = '';
+        tile.classList.remove('playerX');
+        tile.classList.remove('playerO');
+    });
+}
+
+//Event listener to the tiles
+tiles.forEach( (tile, index) => {
+    tile.addEventListener('click', () => userAction(tile, index));
+});
